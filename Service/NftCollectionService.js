@@ -5,6 +5,9 @@ const nftCollection = require('../Model/NftCollectionModel')
 const uploadFile = require('../Utils/S3')
 
 const fs = require('fs')
+const { promisify } = require('util')
+
+const unlinkAsync = promisify(fs.unlink)
 
 
 const multer = require('multer')
@@ -15,6 +18,7 @@ exports.uploadImages = upload.single('image');
 exports.createCollection = catchAsync(async(req, res, next)=>{
   req.file.filename = `image-${req.user._id}-${Date.now()}`
     const data = await uploadFile.uploadFile(req.file, 'collection')
+    await unlinkAsync(req.file.path)
     console.log(data)
     const newCollection = await nftCollection.create({
       name: req.body.name,
