@@ -12,7 +12,7 @@ const compression = require('compression')
 const cors = require('cors')
 const globalErrorHandler = require('./Service/ErrorController')
 const AppError = require('./Utils/AppError')
-
+const collectionRouter = require('./Router/collectionRouter')
 const userRouter = require('./Router/userRouter')
 
 const app = express();
@@ -48,6 +48,7 @@ app.use((req, res, next) => {
 
 // app.use('/api/v1/sample', sampleRouter);
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/collection', collectionRouter)
 app.use(globalErrorHandler);
 
 module.exports = app;

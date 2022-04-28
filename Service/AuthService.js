@@ -156,9 +156,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     const OTP = user.createPasswordResetToken();
     await user.save({ validateBeforeSave: false });
     try {
-        const subject = 'OTP Verification'
-    const Text = `Hello, ${req.user.name} , OTP for your account is ${OTP}`
-    await Email.sendMail(req.user.email , subject, Text);
+    const subject = 'OTP Verification'
+    const Text = `Hello, ${user.name} , OTP for your account is ${OTP}`;
+    await Email.sendMail(req.body.email , subject, Text);
         res.status(200).json({
             status: 'success',
             message: 'OTP sent to mail'
