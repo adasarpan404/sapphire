@@ -7,11 +7,13 @@ const nftCollectionSchema = new mongoose.Schema({
     },
     current_Owner:{
         type: mongoose.Schema.ObjectId,
-        required: [true, 'Art work has its owner']
+        required: [true, 'Art work has its owner'],
+        ref: 'User'
     },
     creator: {
         type: mongoose.Schema.ObjectId,
-        required: [true, 'Art has its creator']
+        required: [true, 'Art has its creator'],
+        ref: 'User'
     },
     currentPrice: {
         type: String, 
@@ -27,7 +29,16 @@ const nftCollectionSchema = new mongoose.Schema({
     }
 })
 
-
+nftCollectionSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'current_Owner',
+        select: 'name phonenumber'
+    }).populate({
+        path: 'creator',
+        select: 'name phonenumber'
+    })
+    next();
+})
 const nftCollection= mongoose.model('NFTCollection', nftCollectionSchema)
 
 module.exports = nftCollection;

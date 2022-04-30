@@ -12,7 +12,8 @@ const unlinkAsync = promisify(fs.unlink)
 
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
-
+const APIFeatures = require('./../Utils/ApiFeatures');
+const factory = require('./HandleFactory')
 exports.uploadImages = upload.single('image');
 
 exports.createCollection = catchAsync(async(req, res, next)=>{
@@ -35,3 +36,15 @@ exports.createCollection = catchAsync(async(req, res, next)=>{
       data: newCollection
     })
 })
+
+
+
+exports.getAllCollection =  catchAsync(async (req, res, next)=> {
+  const doc = await nftCollection.find();
+  res.status(200).json({
+    status: 'success',
+    data: doc
+  })
+})
+
+exports.getCollectionById = factory.getOne(nftCollection)
