@@ -40,7 +40,9 @@ exports.createCollection = catchAsync(async(req, res, next)=>{
 
 
 exports.getAllCollection =  catchAsync(async (req, res, next)=> {
+  console.log("hii")
   const doc = await nftCollection.find();
+  
   res.status(200).json({
     status: 'success',
     data: doc
