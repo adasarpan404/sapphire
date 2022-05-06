@@ -49,4 +49,11 @@ exports.getAllCollection =  catchAsync(async (req, res, next)=> {
   })
 })
 
+exports.getAllUserCollection = catchAsync(async (req, res, next)=>{
+  const doc = await nftCollection.find({current_Owner: req.user._id});
+  res.status(200).json({
+    status: "success",
+    data: doc
+  })
+})
 exports.getCollectionById = factory.getOne(nftCollection)
