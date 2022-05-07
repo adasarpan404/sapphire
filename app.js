@@ -15,6 +15,7 @@ const AppError = require('./Utils/AppError')
 const collectionRouter = require('./Router/collectionRouter')
 const userRouter = require('./Router/userRouter')
 const TradeRouter = require('./Router/TradeRouter')
+const FavouritesRouter = require('./Router/FavouritesRouter')
 
 const app = express();
 app.enable('trust proxy');
@@ -50,7 +51,8 @@ app.use((req, res, next) => {
 // app.use('/api/v1/sample', sampleRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/collection', collectionRouter);
-app.use('/api/v1/trade', TradeRouter)
+app.use('/api/v1/trade', TradeRouter);
+app.use('/api/v1/favourites',FavouritesRouter )
 app.use(globalErrorHandler);
 
 module.exports = app;

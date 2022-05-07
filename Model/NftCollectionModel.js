@@ -32,6 +32,10 @@ const nftCollectionSchema = new mongoose.Schema({
         type: String, 
         enum: ["Sell", "Show", "Private"],
         default: "Sell"
+    },
+    liked: {
+        type: Number,
+        default: 0
     }
 })
 

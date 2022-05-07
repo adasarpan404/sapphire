@@ -57,3 +57,7 @@ exports.getAllUserCollection = catchAsync(async (req, res, next)=>{
   })
 })
 exports.getCollectionById = factory.getOne(nftCollection)
+
+// exports.changeVisibility = catchAsync(async(req, res, next)=>{
+//   const art = await nftCollection.findById(  )
+// })
