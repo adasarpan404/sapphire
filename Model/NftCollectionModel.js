@@ -17,11 +17,11 @@ const nftCollectionSchema = new mongoose.Schema({
         ref: 'User'
     },
     currentPrice: {
-        type: String, 
+        type: Number, 
         required: [true, 'Art must have price']
     },
     startingPrice: {
-        type: String,
+        type: Number,
         required: [true, 'Art must have an opening price']
     },
     imageUrl: {
@@ -60,13 +60,13 @@ nftCollectionSchema.statics.calcWealthForUser= async function(userId){
     ])
 
     if(stats.length > 0){
-        await UserModel.findByAndUpdate(userId, {
+        await UserModel.findByIdAndUpdate(userId, {
             collectionWorth: stats[0].total
         })
     }
 }
 nftCollectionSchema.post('save', function(){
-    this.constructor.calcWealthForUser(this.user);
+    this.constructor.calcWealthForUser(this.current_Owner);
 })
 
 nftCollectionSchema.pre(/^findOneAnd/, async function (next) {
@@ -76,7 +76,7 @@ nftCollectionSchema.pre(/^findOneAnd/, async function (next) {
 
 nftCollectionSchema.post(/^findOneAnd/, async function () {
     // await this.findOne(); does NOT work here, query has already executed
-    await this.r.constructor.calcWealthForUser(this.r.user);
+    await this.r.constructor.calcWealthForUser(this.r.current_Owner);
 });
 const nftCollection= mongoose.model('NFTCollection', nftCollectionSchema)
 
