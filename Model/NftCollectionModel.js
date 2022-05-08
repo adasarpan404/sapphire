@@ -37,6 +37,8 @@ const nftCollectionSchema = new mongoose.Schema({
         type: Number,
         default: 0
     }
+},{
+    timestamps: true
 })
 
 nftCollectionSchema.pre(/^find/, function (next) {

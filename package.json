@@ -9,10 +9,10 @@
   "author": "Arpan Das",
   "license": "ISC",
   "dependencies": {
-    "@babel/plugin-transform-runtime": "^7.2.0",
-		"@babel/polyfill": "^7.0.0",
-		"@babel/runtime": "^7.2.0",
     "@aws-sdk/client-s3": "^3.75.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/runtime": "^7.2.0",
     "aws-sdk": "^2.1117.0",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
@@ -30,18 +30,19 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
     "sharp": "^0.29.3",
+    "stripe": "^8.49.0",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",
-		"@babel/core": "^7.2.0",
-		"@babel/node": "^7.2.0",
-		"@babel/plugin-transform-regenerator": "^7.0.0",
-		"@babel/preset-env": "^7.2.0",
-		"@bull-board/express": "^3.6.0",
-		"babel-plugin-inline-import": "^3.0.0",
-		"babel-plugin-transform-object-rest-spread": "^7.0.0-beta.3",
-		"babel-plugin-transform-remove-console": "^6.9.4"
+    "@babel/core": "^7.2.0",
+    "@babel/node": "^7.2.0",
+    "@babel/plugin-transform-regenerator": "^7.0.0",
+    "@babel/preset-env": "^7.2.0",
+    "@bull-board/express": "^3.6.0",
+    "babel-plugin-inline-import": "^3.0.0",
+    "babel-plugin-transform-object-rest-spread": "^7.0.0-beta.3",
+    "babel-plugin-transform-remove-console": "^6.9.4"
   }
 }

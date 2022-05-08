@@ -208,6 +208,6 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
 })
 
-exports.me = catchAsync(async(req, res, next)=>{
-    const user = await User.findById()
-})
+// exports.me = catchAsync(async(req, res, next)=>{
+//     const user = await User.findById()
+// })
