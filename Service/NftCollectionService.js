@@ -58,6 +58,19 @@ exports.getAllUserCollection = catchAsync(async (req, res, next)=>{
 })
 exports.getCollectionById = factory.getOne(nftCollection)
 
-// exports.changeVisibility = catchAsync(async(req, res, next)=>{
-//   const art = await nftCollection.findById(  )
-// })
+exports.changeVisibility = catchAsync(async(req, res, next)=>{
+  const art = await nftCollection.findById(req.params.id)
+  if(!art){
+    return next(new AppError('This Id is not associated with any art', 401))
+  }
+  if(String(art.current_Owner._id) !== String(req.user._id)){
+    return next(new AppError('This Art does not belong to you', 401))
+  }
+  const changedWish = await nftCollection.findByIdAndUpdate(req.params.id, {
+    wish: req.body.wish
+  })
+  res.status(200).json({
+    status: 'success',
+    data: changedWish
+  })
+})

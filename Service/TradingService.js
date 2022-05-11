@@ -4,25 +4,29 @@ const catchAsync = require('../Utils/CatchAsync')
 
 const nftCollection = require('../Model/NftCollectionModel')
 const TradingModel = require('../Model/TradingModel')
-
+const AuctionModel = require('../Model/AuctionModel')
 const factory = require('./HandleFactory')
 
 const APIFeatures = require('./../Utils/ApiFeatures')
 
 exports.createTrade = catchAsync(async(req, res, next)=> {
+
+    
+    const Bid_confirmed = await AuctionModel.findById(req.body.bid)
     const trade = await TradingModel.create({
-        artId: req.body.artId,
+        artId: Bid_confirmed.artId,
         seller: req.user._id,
-        buyer: req.body.buyer,
-        transaction: req.body.transaction
+        buyer: Bid_confirmed.user,
+        transaction: Bid_confirmed.biddingAmount
     })
-    const nft = await nftCollection.findByIdAndUpdate(req.body.artId, {current_Owner: req.body.buyer, wish: 'Private', currentPrice: req.body.transaction}, {
+    const nft = await nftCollection.findByIdAndUpdate(Bid_confirmed.artId, {current_Owner: Bid_confirmed.user, wish: 'Private', currentPrice: Bid_confirmed.biddingAmount}, {
         
             new: true,
             runValidators: true
         
     })
-
+    
+    const Bid=await AuctionModel.deleteMany({artId: Bid_confirmed.artId})
     res.status(200).json({
         status: 'success',
         data: trade,

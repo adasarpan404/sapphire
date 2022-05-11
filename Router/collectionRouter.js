@@ -12,6 +12,7 @@ router.get('/', NftCollectionService.getAllCollection);
 
 router.use(AuthService.protect)
 router.get('/myCollection', NftCollectionService.getAllUserCollection);
+router.patch('/wish/:id', NftCollectionService.changeVisibility)
 router.get('/:id', NftCollectionService.getCollectionById);
 
 
