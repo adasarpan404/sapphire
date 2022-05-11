@@ -70,7 +70,7 @@ exports.customPaymentService = catchAsync(async(req, res, next)=>{
                 })
                 await UserModel.findByIdAndUpdate(
                     _id,
-                    { walllet: amount_to_be_added} , {
+                    { wallet: amount_to_be_added} , {
         
                         new: true,
                         runValidators: true
