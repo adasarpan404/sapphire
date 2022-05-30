@@ -25,7 +25,7 @@ exports.createCollection = catchAsync(async(req, res, next)=>{
     const data = await uploadFile.uploadFile(req.file, 'collection')
     
 
-web3.eth.getNodeInfo().then(console.log);
+// web3.eth.getNodeInfo().then(console.log);
     await unlinkAsync(req.file.path)
     console.log(data)
     const newCollection = await nftCollection.create({
