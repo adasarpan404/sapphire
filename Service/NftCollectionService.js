@@ -6,7 +6,11 @@ const uploadFile = require('../Utils/S3')
 
 const fs = require('fs')
 const { promisify } = require('util')
-
+const Web3 = require('web3')
+const AWSHttpProvider = require('../Utils/aws-http-provider.js')
+const endpoint = process.env.AMB_HTTP_ENDPOINT
+    
+const web3 = new Web3(new AWSHttpProvider(endpoint));
 const unlinkAsync = promisify(fs.unlink)
 
 
@@ -19,6 +23,9 @@ exports.uploadImages = upload.single('image');
 exports.createCollection = catchAsync(async(req, res, next)=>{
   req.file.filename = `image-${req.user._id}-${Date.now()}`
     const data = await uploadFile.uploadFile(req.file, 'collection')
+    
+
+web3.eth.getNodeInfo().then(console.log);
     await unlinkAsync(req.file.path)
     console.log(data)
     const newCollection = await nftCollection.create({

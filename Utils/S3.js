@@ -16,7 +16,6 @@ exports.uploadFile = async (file, location) => {
   console.log(file.filename)
     const fileStream = fs.createReadStream(file.path)
     const mimeType = mime.lookup(file)
-    console.log(mimeType)
     try{
     const uploadParams = {
       Bucket: `${BUCKETNAME}`,
