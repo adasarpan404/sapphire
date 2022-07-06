@@ -13,8 +13,9 @@ exports.createTrade = catchAsync(async(req, res, next)=> {
 
     
     const Bid_confirmed = await AuctionModel.findById(req.body.bid)
+    console.log(Bid_confirmed)
     const trade = await TradingModel.create({
-        artId: Bid_confirmed.artId,
+        artId: Bid_confirmed.artId._id,
         seller: req.user._id,
         buyer: Bid_confirmed.user,
         transaction: Bid_confirmed.biddingAmount

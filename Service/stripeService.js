@@ -55,7 +55,7 @@ exports.customPaymentService = catchAsync(async(req, res, next)=>{
                     description: `You added ${amountWithOutTax} into wallet`,
                 })
                 const invoicePaid = await stripe.invoices.pay(invoice.id)
-                let amount_to_be_added = wallet+amount
+                let amount_to_be_added = wallet + amount
                 console.log(invoicePaid)
                 await PurchaseOrderModel.create({
                     totalAmount: invoicePaid.subtotal,
